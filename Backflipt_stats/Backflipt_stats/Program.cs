@@ -17,15 +17,14 @@ namespace Backflipt_stats
             nancyHost.Start();
             Console.WriteLine("Web server running...");
             Console.ReadLine();
-            Console.WriteLine("Hello World new!!!");
+            nancyHost.Stop();
         }
     }
     public class HelloModule : NancyModule
     {
         public HelloModule()
         {
-            Get["/"] = parameters => "Hello World";
+            Get["/"] = parameters => "Hello World Testing";
         }
     }
-
 }
