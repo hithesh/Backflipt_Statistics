@@ -24,8 +24,6 @@ namespace AuthServer
             nancyHost.Start();
             Console.WriteLine("Web server running...");
             Console.ReadLine();
-
-
             nancyHost.Stop();
         }
     }
@@ -40,7 +38,6 @@ namespace AuthServer
                 ServicePointManager.ServerCertificateValidationCallback = EwsXenLib.security.CertificateValidationCallBack;
                 Dictionary<string, string> result = new Dictionary<string, string>();
                 Tuple<string, string> logindetails = new Tuple<string, string>("", "");
-
                 try
                 {
                     logindetails = login(this.Request.Form);
@@ -50,8 +47,6 @@ namespace AuthServer
                     EwsXenLib.Program.logger.Info(e.Message);
                 }
                 EwsXenLib.Program.logger.Info("");
-
-
                 if (logindetails.Item1 != "")
                 {
                     result.Add("provider", logindetails.Item1);
@@ -62,18 +57,10 @@ namespace AuthServer
                 {
                     result.Add("status", "error");
                     result.Add("error", "Authentication Failed");
-
                 }
-
-
-
-
-
                 return Response.AsJson(result);
             };
         }
-
-
         public static Tuple<string, string> login(DynamicDictionary x)
         {
             ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
@@ -112,8 +99,6 @@ namespace AuthServer
                     logged = EwsXenLib.Program.Authenticate(x["username"], pwd, x["domain"], ref service);
                     logintype = "exchange_ews_advanced";
                 }
-
-
             }
             string url = "";
             string method = "";
@@ -123,11 +108,7 @@ namespace AuthServer
                 url = service.Url.ToString();
             }
             return new Tuple<string, string>(method, url);
-
         }
-
-
-
     }
 }
 `
