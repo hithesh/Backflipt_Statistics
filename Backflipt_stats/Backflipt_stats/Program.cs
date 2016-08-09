@@ -38,8 +38,9 @@ namespace Backflipt_stats
     }
     public class HelloModule : NancyModule
     {
-        private static MongoClient client = new MongoClient();
-        private static MongoDB.Driver.IMongoDatabase database = client.GetDatabase("test");
+        private static string connectionstring = "mongodb://oodlyadmin:ZHS4CHOE2JPUK9EEOJSKI6Q8UUYTG1G38URQ4XUH@candidate.5.mongolayer.com:10613,candidate.6.mongolayer.com:10495/Oodly-classic-new";
+        private static MongoClient client = new MongoClient(connectionstring);
+        private static MongoDB.Driver.IMongoDatabase database = client.GetDatabase("Oodly-classic-new");
 
         public HelloModule()
         { 
@@ -47,11 +48,14 @@ namespace Backflipt_stats
             //KeyValuePair<dynamic, dynamic> kvp = new KeyValuePair<dynamic, dynamic>();
             Get["/"] = parameters => {
                 List<BsonDocument> l = new List<BsonDocument>();
+                var p = "<html>";
                 foreach (var x in database.ListCollections().ToList())
                 {
+                    p = p + x.ToString();
                     l.Add(x);
                 }
-                var p = "<html>"+l[0].ToString()+l[1].ToString()+"</html>";
+                //var p = "<html>"+l[0].ToString()+l[1].ToString()+"</html>";
+                p = p + "</html>";
                 return p;
             };
             Get["/hello/{name}"] = parameters => { return "Hello " + parameters.name; };
