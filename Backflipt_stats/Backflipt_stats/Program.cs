@@ -36,6 +36,7 @@ namespace Backflipt_stats
         private static string connectionstring = "mongodb://oodlyadmin:ZHS4CHOE2JPUK9EEOJSKI6Q8UUYTG1G38URQ4XUH@candidate.5.mongolayer.com:10613,candidate.6.mongolayer.com:10495/Oodly-classic-new";
         private static MongoClient client = new MongoClient(connectionstring);
         private static MongoDB.Driver.IMongoDatabase database = client.GetDatabase("Oodly-classic-new");
+        
         public IndexModule()
         {
             //The get and post methods for the main page.
@@ -49,7 +50,7 @@ namespace Backflipt_stats
                 var p = "<html>";
                 foreach(var x in result)
                 {
-                    Console.WriteLine(x);
+                    //Console.WriteLine(x);
                     p = p + "<p>" + x.ToString() + "</p>";
                     l.Add(x);
                 }
